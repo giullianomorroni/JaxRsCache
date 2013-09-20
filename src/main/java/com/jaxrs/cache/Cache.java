@@ -15,16 +15,36 @@ public class Cache  {
 		super();
 	}
 
+	/**
+	 * Add a value to cache.
+	 * @param url
+	 * @param value
+	 */
 	public void put(String url, Object value){
-		long timeInMillis = Calendar.getInstance().getTimeInMillis();
+		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
 		cache.put(url, value);
 		ttl.put(url, timeInMillis);
 	}
 
+	/**
+	 * Add a value to cache and register its time to live
+	 * @param url
+	 * @param value
+	 * @param timeToLive
+	 */
+	public void put(String url, Object value, Long timeToLive){
+		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
+		cache.put(url, value);
+		ttl.put(url, timeInMillis);
+		CacheConfig.ttl(url, timeToLive);
+	}
+
 	public Object get(String url){
-		long timeInMillis = Calendar.getInstance().getTimeInMillis();
-		long createdTimeInMillis = ttl.get(url);
-		long timeToLiveInMillis = CacheConfig.ttl(url);
+		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
+		Long createdTimeInMillis = ttl.get(url);
+		if (createdTimeInMillis == null)
+			return null;
+		Long timeToLiveInMillis = CacheConfig.ttl(url);
 
 		if ((timeInMillis - createdTimeInMillis) > timeToLiveInMillis) {
 			Object value = cache.get(url);

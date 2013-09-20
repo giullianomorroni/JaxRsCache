@@ -21,8 +21,22 @@ public class CacheConfig  {
 		ttl = config;
 	}
 
+	/**
+	 * If its key doesnt have an ttl value will assume defaul 86400 (one day from time its inputed)
+	 * @param url
+	 * @return
+	 */
 	public static Long ttl(String url){
-		return ttl.get(url);
+		Long timeToLive = ttl.get(url);
+		if (timeToLive == null) {
+			timeToLive = 86400L;
+			ttl.put(url, timeToLive);
+		}
+		return timeToLive;
+	}
+
+	public static void ttl(String url, Long timeToLive){
+		ttl.put(url, timeToLive);
 	}
 
 }

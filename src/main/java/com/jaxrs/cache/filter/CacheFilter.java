@@ -28,10 +28,6 @@ public class CacheFilter implements ResourceFilter, ContainerRequestFilter, Cont
 
 	@Override
 	public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
-		Object object = cache.get(request.getRequestUri().toString());
-		if (object != null){
-			response.setEntity(object);
-		}
 		return response;
 	}
 
