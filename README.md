@@ -2,9 +2,8 @@ JaxRsCache
 ==========
 
 O JaxRsCache é uma biblioteca de de armazenamento e recuperação de dados em cache integrada com Jersey (1.+), 
-que proporciona acesso a dados antes mesmo de chegar na sua aplicação. 
+que proporciona acesso a dados através de um interceptador de requisições. Seu uso é simples e intuitivo.
 
-Embora não seja um cache de nível do servidor o JaxRsCache trata as requisições antes dela chegarem ao seu recurso RestFul e caso encontre um valor 
-armazenado para aquela URI retorna o valor dentro do response. 
+Embora não seja um cache de nível do servidor (Http Apache ou IIS) o JaxRsCache trata as requisições antes mesmo dela chegarem ao seu objeto RestFul. O que garante alta performance em respostas e baixa latência. 
 
-Desta maneira este cache é provavelmente o mais rápido para aplicações RestFul pois dispensa a criação da sua classe RestFul ou qualquer dependência dentro dela.
+Sendo assim, esta biblioteca de cache é provavelmente o melhor caminho para aplicações RestFul que precisam de respostas rápidas e economia de recursos no servidor de aplicação.
